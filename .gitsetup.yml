@@ -1,0 +1,4 @@
+---
+remotes:
+  primary: git@github.com:destructuring/tvd-vagrant
+  secondary: git@bitbucket.org:destructuring/tvd-vagrant
