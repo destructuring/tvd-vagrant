@@ -1,2 +1,5 @@
-/.bundle
-/vendor/bundle
+/.bundle/
+/vendor/bundle/
+/*.gem
+/crash.log
+/output
