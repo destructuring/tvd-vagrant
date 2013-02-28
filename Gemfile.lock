@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    tvd-vagrant (0.0.2)
+      microwave
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -52,3 +58,4 @@ PLATFORMS
 
 DEPENDENCIES
   tvd-tvdinner
+  tvd-vagrant!
