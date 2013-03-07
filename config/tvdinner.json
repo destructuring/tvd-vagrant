@@ -1,0 +1,15 @@
+{
+  "run_list": [
+    "tvdinner"
+  ],
+  "tvd": {
+    "author": "Tom Bombadil",
+    "class": "Vagrant",
+    "description": "vagrant cookbook and utilities",
+    "email": "amanibhavam@destructuring.org",
+    "git_url": "https://github.com/destructuring/tvd-vagrant",
+    "homepage": "http://destructuring.org/tvd-vagrant",
+    "name": "vagrant",
+    "summary": "vagrant cookbook and utilities"
+  }
+}
