@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tvd-vagrant (0.0.10)
+    tvd-vagrant (0.0.11)
       tvd-tvdinner
 
 GEM
