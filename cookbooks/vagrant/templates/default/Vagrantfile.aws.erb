@@ -1,3 +1,5 @@
+require "vagrant-aws"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "<%= node[:vagrant][:box] %>"
   <% if node[:vagrant][:provision] && node[:vagrant][:provision][:shell] %>
