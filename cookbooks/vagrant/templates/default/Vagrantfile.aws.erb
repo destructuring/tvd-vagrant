@@ -6,11 +6,12 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "<%= node[:vagrant][:provision][:shell][:path] %>"
   <% end %>
 
+  config.ssh.username = "<%= node[:vagrant][:ssh_username] %>"
+  config.ssh.private_key_path = "<%= node[:vagrant][:ssh_private_key_path] %>"
+
   config.vm.provider :aws do |aws|
     aws.keypair_name = "<%= node[:vagrant][:keypair_name] %>"
     aws.instance_type = "<%= node[:vagrant][:instance_type] %>"
-    aws.ssh_username = "<%= node[:vagrant][:ssh_username] %>"
-    aws.ssh_private_key_path = "<%= node[:vagrant][:ssh_private_key_path] %>"
   end
 end
 
