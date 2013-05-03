@@ -2,12 +2,22 @@ require "vagrant-aws"
 
 Vagrant.configure("2") do |config|
   config.vm.box = "<%= node[:vagrant][:box] %>"
-  <% if node[:vagrant][:provision] && node[:vagrant][:provision][:shell] %>
-  config.vm.provision :shell, :path => "<%= node[:vagrant][:provision][:shell][:path] %>"
+
+  <% if node[:vagrant][:ssh_username] %>
+  config.ssh.username = "<%= node[:vagrant][:ssh_username] %>"
   <% end %>
 
-  config.ssh.username = "<%= node[:vagrant][:ssh_username] %>"
+  <% if node[:vagrant][:ssh_private_key_path] %>
   config.ssh.private_key_path = "<%= node[:vagrant][:ssh_private_key_path] %>"
+  <% end %>
+
+  <% if node[:vagrant][:provision] && node[:vagrant][:provision][:shell] %>
+  config.vm.provision :shell, 
+                      :path => "<%= node[:vagrant][:provision][:shell][:path] %>", 
+                      :args => "<%= node[:vagrant][:provision][:shell][:args] %>"
+  <% end %>
+
+  config.vm.synced_folder ".", "/vagrant", :id => "vagrant-root", :disabled => true
 
   config.vm.provider :aws do |aws|
     aws.keypair_name = "<%= node[:vagrant][:keypair_name] %>"
