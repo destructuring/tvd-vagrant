@@ -1,0 +1,18 @@
+require "vagrant-shell"
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "<%= node[:vagrant][:box] %>"
+  <% if node[:vagrant][:provision] && node[:vagrant][:provision][:shell] %>
+  config.vm.provision :shell, :path => "<%= node[:vagrant][:provision][:shell][:path] %>"
+  <% end %>
+
+  config.ssh.username = "<%= node[:vagrant][:ssh_username] %>"
+  config.vm.synced_folder ".", "/vagrant", :id => "vagrant-root", :disabled => true
+
+  config.vm.provider :shell do |shell|
+    shell.script = ENV['SHELL_SCRIPT']
+    shell.run_args = [ ENV['SHELL_ARGS'] ]
+  end
+end
+
+# vi: set ft=ruby :
