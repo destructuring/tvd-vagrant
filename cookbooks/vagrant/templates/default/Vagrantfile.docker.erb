@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :shell do |shell|
     shell.script = "<%= node[:vagrant][:shell_script] %>"
-    shell.run_args = "<%= node[:vagrant][:shell_args] %>"
+    shell.run_args = [ "<%= node[:vagrant][:shell_args] %>" ]
   end
 end
 
