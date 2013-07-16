@@ -1,5 +1,7 @@
 require "vagrant-shell"
 
+VagrantPlugins::Shell::Plugin.make_provider(:docker)
+
 Vagrant.configure("2") do |config|
   config.vm.box = "<%= node[:vagrant][:box] %>"
 
@@ -11,17 +13,11 @@ Vagrant.configure("2") do |config|
   config.ssh.private_key_path = "<%= node[:vagrant][:ssh_private_key_path] %>"
   <% end %>
 
-  <% if node[:vagrant][:provision] && node[:vagrant][:provision][:shell] %>
-  config.vm.provision :shell, 
-                      :path => "<%= node[:vagrant][:provision][:shell][:path] %>", 
-                      :args => "<%= node[:vagrant][:provision][:shell][:args] %>"
-  <% end %>
-
   config.vm.synced_folder ".", "/vagrant", :id => "vagrant-root", :disabled => true
 
-  config.vm.provider :shell do |shell|
-    shell.script = "<%= node[:vagrant][:shell_script] %>"
-    shell.run_args = [ "<%= node[:vagrant][:shell_args] %>" ]
+  config.vm.provider :docker do |docker, override|
+    docker.script = docker.find_script(:docker)
+    docker.run_args = [ "<%= node[:vagrant][:shell_args] %>" ]
   end
 end
 
