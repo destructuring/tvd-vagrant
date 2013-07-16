@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :virtualbox do |virtualbox, override|
     override.vm.base_mac = "<%= node[:vagrant][:base_mac] %>"
+    virtualbox.customize [ "modifyvm", :id, "--memory", "1024" ]
+    virtualbox.customize [ "modifyvm", :id, "--cpus", "2" ]
   end
 end
 
