@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :aws do |aws|
     aws.keypair_name = "<%= node[:vagrant][:keypair_name] %>"
     aws.instance_type = "<%= node[:vagrant][:instance_type] %>"
+    aws.region = ENV['AWS_DEFAULT_REGION'] || 'us-west-1'
   end
 end
 
