@@ -1,4 +1,4 @@
 template "#{node[:vagrant][:release_dir]}/Vagrantfile" do
-  source "Vagrantfile.ec2.erb"
+  source "Vagrantfile.aws.erb"
   mode 00644
 end
