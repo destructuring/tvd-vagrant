@@ -1,4 +1,5 @@
 require "vagrant-shell"
+require "vagrant-shell/ssh-agent"
 
 VagrantPlugins::Shell::Plugin.make_provider(:static)
 
@@ -16,7 +17,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant", :id => "vagrant-root", :disabled => true
 
   config.vm.provider :static do |static|
-    static.script = docker.find_script(:static)
+    static.image =  "<%= node[:vagrant][:image] %>"
+    static.script = static.find_script(:static)
   end
 end
 
