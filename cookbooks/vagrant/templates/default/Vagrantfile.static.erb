@@ -1,0 +1,23 @@
+require "vagrant-shell"
+
+VagrantPlugins::Shell::Plugin.make_provider(:static)
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "<%= node[:vagrant][:box] %>"
+
+  <% if node[:vagrant][:ssh_username] %>
+  config.ssh.username = "<%= node[:vagrant][:ssh_username] %>"
+  <% end %>
+
+  <% if node[:vagrant][:ssh_private_key_path] %>
+  config.ssh.private_key_path = "<%= node[:vagrant][:ssh_private_key_path] %>"
+  <% end %>
+
+  config.vm.synced_folder ".", "/vagrant", :id => "vagrant-root", :disabled => true
+
+  config.vm.provider :static do |static|
+    static.script = docker.find_script(:static)
+  end
+end
+
+# vi: set ft=ruby :
