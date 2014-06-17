@@ -9,6 +9,10 @@ Vagrant.configure("2") do |config|
   config.ssh.username = "<%= node[:vagrant][:ssh_username] %>"
   <% end %>
 
+  <% if node[:vagrant][:ssh_forward_agent] %>
+  config.ssh.forward_agent = true
+  <% end %>
+
   <% if node[:vagrant][:ssh_private_key_path] %>
   config.ssh.private_key_path = "<%= node[:vagrant][:ssh_private_key_path] %>"
   <% end %>
